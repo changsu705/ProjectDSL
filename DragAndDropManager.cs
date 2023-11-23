@@ -10,15 +10,84 @@ public class DragAndDropManager : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0))
         {
-            // 마우스 왼쪽 버튼을 클릭할 때
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
 
-            if (Physics.Raycast(ray, out hit))
+            if (Physics.Raycast(ray, out hit) && hit.collider != null)
             {
-                if (hit.collider != null)
+                string objectName = hit.collider.gameObject.name;
+                if(objectName =="MP1C1(Clone)")
                 {
-                    // 드래그할 오브젝트를 선택
+                    draggedObject = hit.collider.gameObject;
+                    offset = draggedObject.transform.position - hit.point;
+                    isDragging = true;
+                }
+            }
+             if (Physics.Raycast(ray, out hit) && hit.collider != null)
+            {
+                string objectName = hit.collider.gameObject.name;
+                if(objectName =="MP1C2(Clone)")
+                {
+                    draggedObject = hit.collider.gameObject;
+                    offset = draggedObject.transform.position - hit.point;
+                    isDragging = true;
+                }
+            }
+             if (Physics.Raycast(ray, out hit) && hit.collider != null)
+            {
+                string objectName = hit.collider.gameObject.name;
+                if(objectName =="MP1C3(Clone)")
+                {
+                    draggedObject = hit.collider.gameObject;
+                    offset = draggedObject.transform.position - hit.point;
+                    isDragging = true;
+                }
+            }
+             if (Physics.Raycast(ray, out hit) && hit.collider != null)
+            {
+                string objectName = hit.collider.gameObject.name;
+                if(objectName =="MP1C4(Clone)")
+                {
+                    draggedObject = hit.collider.gameObject;
+                    offset = draggedObject.transform.position - hit.point;
+                    isDragging = true;
+                }
+            }
+             if (Physics.Raycast(ray, out hit) && hit.collider != null)
+            {
+                string objectName = hit.collider.gameObject.name;
+                if(objectName =="MP2C1(Clone)")
+                {
+                    draggedObject = hit.collider.gameObject;
+                    offset = draggedObject.transform.position - hit.point;
+                    isDragging = true;
+                }
+            }
+             if (Physics.Raycast(ray, out hit) && hit.collider != null)
+            {
+                string objectName = hit.collider.gameObject.name;
+                if(objectName =="MP2C2(Clone)")
+                {
+                    draggedObject = hit.collider.gameObject;
+                    offset = draggedObject.transform.position - hit.point;
+                    isDragging = true;
+                }
+            }
+             if (Physics.Raycast(ray, out hit) && hit.collider != null)
+            {
+                string objectName = hit.collider.gameObject.name;
+                if(objectName =="MP2C3(Clone)")
+                {
+                    draggedObject = hit.collider.gameObject;
+                    offset = draggedObject.transform.position - hit.point;
+                    isDragging = true;
+                }
+            }
+             if (Physics.Raycast(ray, out hit) && hit.collider != null)
+            {
+                string objectName = hit.collider.gameObject.name;
+                if(objectName =="MP2C4(Clone)")
+                {
                     draggedObject = hit.collider.gameObject;
                     offset = draggedObject.transform.position - hit.point;
                     isDragging = true;
@@ -28,15 +97,21 @@ public class DragAndDropManager : MonoBehaviour
 
         if (isDragging)
         {
-            // 마우스를 따라 오브젝트 이동
-            Vector3 newPosition = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 10)) + offset;
+            // ���콺�� ���� ������Ʈ �̵�
+            Vector3 newPosition = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 61)) + offset;
             draggedObject.transform.position = newPosition;
 
             if (Input.GetMouseButtonUp(0))
             {
-                // 마우스 왼쪽 버튼을 놓을 때
+                // ���콺 ���� ��ư�� ���� ��
                 isDragging = false;
                 draggedObject = null;
+                // A_Destroy 컴포넌트를 비활성화
+                A_Destroy aDestroyComponent = draggedObject.GetComponent<A_Destroy>();
+                if (aDestroyComponent != null)
+                {
+                    aDestroyComponent.enabled = false;
+                }
             }
         }
     }
